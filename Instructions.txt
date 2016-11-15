@@ -1,0 +1,181 @@
+
+
+1) create an empty database named WTSEmplyees.  Run the scripts in the Appendix
+
+
+2) create an empty database named WTSEmplyees.  Run the scripts in the Appendix
+
+
+3) create the following stored procedure in both databases
+
+
+	      create proc sp_GetEmployeeHours
+              (
+                  @Month int
+              )
+              as
+              begin
+              set nocount on;
+              select 
+                  e.Employee_ID, 
+                  e.FirstName, 
+                  e.Surname,  
+                  sum(DATEDIFF(hour, s.shift_start, s.shift_end)) as TotalHours
+              from employee e
+                  inner join [dbo].[Employee_Works_Shift] ws on e.employee_ID = ws.employee_id
+                  inner join [dbo].[Shifts] s on s.shift_id = ws.shift_id
+              where 
+                  datepart(mm,s.Shift_Start) = @Month and datepart(mm, s.shift_end) = @Month
+              group by 
+                  e.Employee_ID, e.FirstName, e.Surname
+              end
+
+
+Appendix
+---------
+
+CREATE TABLE [dbo].[Employee](
+[Employee_ID] [int] IDENTITY(1,1) NOT NULL,
+[FirstName] [varchar](50) NOT NULL,
+[Surname] [varchar](50) NOT NULL,
+CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED
+(
+[Employee_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+CREATE TABLE [dbo].[Employee_Works_Shift](
+[Employee_ID] [int] NOT NULL,
+[Shift_ID] [int] NOT NULL
+) ON [PRIMARY]
+CREATE TABLE [dbo].[Shifts](
+[Shift_ID] [int] IDENTITY(1,1) NOT NULL,
+[Shift_Start] [datetime] NOT NULL,
+[Shift_End] [datetime] NOT NULL,
+[Shift_Name] [varchar](50) NOT NULL,
+CONSTRAINT [PK_Shifts] PRIMARY KEY CLUSTERED
+(
+[Shift_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+SET IDENTITY_INSERT [dbo].[Employee] ON
+GO
+INSERT [dbo].[Employee] ([Employee_ID], [FirstName], [Surname]) VALUES (1, N'John',
+N'Brown')
+GO
+INSERT [dbo].[Employee] ([Employee_ID], [FirstName], [Surname]) VALUES (2, N'Harry',
+N'Potter')
+GO
+INSERT [dbo].[Employee] ([Employee_ID], [FirstName], [Surname]) VALUES (3, N'Alice',
+N'White')
+GO
+INSERT [dbo].[Employee] ([Employee_ID], [FirstName], [Surname]) VALUES (4, N'Joe',
+N'Mellor')
+GO
+INSERT [dbo].[Employee] ([Employee_ID], [FirstName], [Surname]) VALUES (5, N'Neil',
+N'Fearn')
+GO
+INSERT [dbo].[Employee] ([Employee_ID], [FirstName], [Surname]) VALUES (6, N'Rob',
+N'Lang')
+GO
+SET IDENTITY_INSERT [dbo].[Employee] OFF
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (1, 1)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (2, 1)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (3, 1)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (4, 1)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (1, 2)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (5, 2)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (6, 2)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (1, 4)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (4, 4)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (6, 4)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (2, 4)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (6, 5)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (2, 5)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (4, 5)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (5, 5)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (1, 6)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (2, 6)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (3, 6)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (6, 6)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (3, 7)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (5, 7)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (2, 7)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (1, 8)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (5, 8)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (2, 8)
+GO
+INSERT [dbo].[Employee_Works_Shift] ([Employee_ID], [Shift_ID]) VALUES (3, 8)
+GO
+SET IDENTITY_INSERT [dbo].[Shifts] ON
+GO
+INSERT [dbo].[Shifts] ([Shift_ID], [Shift_Start], [Shift_End], [Shift_Name]) VALUES
+(1, CAST(N'11 Nov 2016 09:00:00' AS DateTime), CAST(N'11 Nov 2016 17:00:00' AS
+DateTime), N'Morning 9-17')
+GO
+INSERT [dbo].[Shifts] ([Shift_ID], [Shift_Start], [Shift_End], [Shift_Name]) VALUES
+(2, CAST(N'12 Nov 2016 10:00:00' AS DateTime), CAST(N'12 Nov 2016 14:00:00' AS
+DateTime), N'Morning 10-14')
+GO
+INSERT [dbo].[Shifts] ([Shift_ID], [Shift_Start], [Shift_End], [Shift_Name]) VALUES
+(4, CAST(N'13 Nov 2016 09:00:00' AS DateTime), CAST(N'13 Nov 2016 17:00:00' AS
+DateTime), N'Morning 9-17')
+GO
+INSERT [dbo].[Shifts] ([Shift_ID], [Shift_Start], [Shift_End], [Shift_Name]) VALUES
+(5, CAST(N'14 Nov 2016 10:00:00' AS DateTime), CAST(N'14 Nov 2016 14:00:00' AS
+DateTime), N'Morning 10-14')
+GO
+INSERT [dbo].[Shifts] ([Shift_ID], [Shift_Start], [Shift_End], [Shift_Name]) VALUES
+(6, CAST(N'15 Nov 2016 09:00:00' AS DateTime), CAST(N'15 Nov 2016 17:00:00' AS
+DateTime), N'Morning 9-17')
+GO
+INSERT [dbo].[Shifts] ([Shift_ID], [Shift_Start], [Shift_End], [Shift_Name]) VALUES
+(7, CAST(N'13 Dec 2016 09:00:00' AS DateTime), CAST(N'13 Dec 2016 17:00:00' AS
+DateTime), N'Morning 9-17')
+GO
+INSERT [dbo].[Shifts] ([Shift_ID], [Shift_Start], [Shift_End], [Shift_Name]) VALUES
+(8, CAST(N'14 Dec 2016 09:00:00' AS DateTime), CAST(N'14 Dec 2016 17:00:00' AS
+DateTime), N'Morning 9-17')
+GO
+SET IDENTITY_INSERT [dbo].[Shifts] OFF
+GO
+ALTER TABLE [dbo].[Employee_Works_Shift] WITH CHECK ADD CONSTRAINT
+[FK_Employee_Works_Shift_Employee] FOREIGN KEY([Employee_ID])
+REFERENCES [dbo].[Employee] ([Employee_ID])
+GO
+ALTER TABLE [dbo].[Employee_Works_Shift] CHECK CONSTRAINT
+[FK_Employee_Works_Shift_Employee]
+GO
+ALTER TABLE [dbo].[Employee_Works_Shift] WITH CHECK ADD CONSTRAINT
+[FK_Employee_Works_Shift_Shifts] FOREIGN KEY([Shift_ID])
+REFERENCES [dbo].[Shifts] ([Shift_ID])
+GO
+ALTER TABLE [dbo].[Employee_Works_Shift] CHECK CONSTRAINT
+[FK_Employee_Works_Shift_Shifts]
+GO
