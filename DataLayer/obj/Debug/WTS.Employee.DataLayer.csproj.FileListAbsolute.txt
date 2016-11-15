@@ -1,0 +1,9 @@
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\bin\Debug\ClassLibrary1.dll.config
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\bin\Debug\EntityFramework.dll
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\bin\Debug\EntityFramework.xml
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\ClassLibrary1\obj\Debug\ClassLibrary1.pdb

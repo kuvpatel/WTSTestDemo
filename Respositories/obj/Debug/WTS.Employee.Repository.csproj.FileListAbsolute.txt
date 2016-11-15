@@ -1,0 +1,9 @@
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\obj\Debug\WTS.Employee.Repository.csprojResolveAssemblyReference.cache
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\bin\Debug\Respositories.dll
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\bin\Debug\Respositories.pdb
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\bin\Debug\ClassLibrary1.dll
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\bin\Debug\EntityFramework.dll
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\bin\Debug\ClassLibrary1.pdb
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\bin\Debug\EntityFramework.xml
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\obj\Debug\Respositories.dll
+c:\users\kuvshik\documents\visual studio 2015\Projects\WTSService\Respositories\obj\Debug\Respositories.pdb
